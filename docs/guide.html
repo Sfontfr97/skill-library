@@ -1,0 +1,403 @@
+<title>Skill Library Guide</title>
+<script>document.documentElement.lang = 'en'</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a reading column with a sticky contents rail on wide screens; one live picture of the band
+   leads, and every section after it explains one part of that picture. */
+:root {
+  --bg: #ffffff;
+  --surface: #f5f4f2;
+  --line: #e4e1dc;
+  --ink: #1d1b19;
+  --muted: #5c5853;
+  --clay: #b5522f;
+  --clay-soft: #f6e9e4;
+  --band: #262624;
+  --band-ink: #f2efea;
+  --band-muted: #b3ada5;
+  --band-line: #3d3b38;
+  --band-clay: #e38c6a;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #181716; --surface: #222120; --line: #34322f; --ink: #f2efea; --muted: #b3ada5;
+    --clay: #e38c6a; --clay-soft: #3a2d28; --band: #2a2927; --band-line: #45423e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #181716; --surface: #222120; --line: #34322f; --ink: #f2efea; --muted: #b3ada5;
+  --clay: #e38c6a; --clay-soft: #3a2d28; --band: #2a2927; --band-line: #45423e; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 400 17px/1.6 var(--body);
+  padding-inline: 20px; padding-block: 0 80px;
+}
+.wrap { max-width: 1080px; margin-inline: auto; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 56px; }
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 32px); align-self: start; padding-top: 72px; }
+nav.toc p { margin: 0 0 10px; font-size: 14px; color: var(--muted); }
+nav.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+nav.toc a { color: var(--ink); text-decoration: none; font-size: 15px; }
+nav.toc a:hover { color: var(--clay); }
+main { min-width: 0; max-width: 700px; }
+
+a { color: var(--clay); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; letter-spacing: -0.01em; margin: 0; }
+h1 { font-size: clamp(34px, 5vw, 48px); line-height: 1.08; font-weight: 700; }
+h2 { font-size: 26px; line-height: 1.2; font-weight: 600; }
+h3 { font-size: 19px; line-height: 1.3; font-weight: 600; }
+p { margin: 0; }
+code, kbd { font-family: var(--mono); font-size: 0.86em; background: var(--surface); border-radius: 5px; padding: 1px 6px; overflow-wrap: anywhere; }
+kbd { border: 1px solid var(--line); }
+
+header.hero { padding-top: 72px; display: grid; gap: 16px; }
+.mark { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); font-size: 15px; }
+.lede { font-size: 20px; color: var(--muted); max-width: 58ch; }
+
+section { padding-top: 56px; display: grid; gap: 16px; scroll-margin-top: 24px; }
+section > p, section li { max-width: 64ch; }
+ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; }
+
+/* The band, drawn as it looks in the desktop app (dark), so readers can match it to the real thing. */
+figure.band { margin: 8px 0 0; display: grid; gap: 14px; }
+.bandbox {
+  background: var(--band); color: var(--band-ink); border: 1px solid var(--band-line);
+  border-radius: 16px; padding: 18px 20px; font: 400 15px/1.4 var(--body);
+  display: grid; gap: 14px;
+}
+.brow { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.brow .end { margin-left: auto; display: flex; gap: 18px; color: var(--band-muted); }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.pick { border: 1px solid var(--band-line); border-radius: 8px; padding: 3px 10px; display: inline-flex; gap: 8px; align-items: center; }
+.field { border: 1px solid var(--band-line); border-radius: 8px; padding: 3px 12px; color: var(--band-muted); flex: 0 1 220px; min-width: 0; }
+.dim { color: var(--band-muted); }
+.tabs { display: flex; gap: 22px; flex-wrap: wrap; color: var(--band-muted); }
+.tabs .on { color: var(--band-ink); background: #3a3936; border-radius: 8px; padding: 1px 10px; margin: -1px -10px; }
+.group { color: var(--band-muted); font-size: 14px; }
+.row { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 14px; align-items: center; }
+.tile { width: 36px; height: 36px; border-radius: 10px; background: #3a2d28; display: grid; place-items: center; }
+.row b { font-weight: 600; display: block; }
+.row .sum { display: block; color: var(--band-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.acts { display: flex; gap: 12px; align-items: center; }
+.acts .pen { color: var(--band-muted); }
+.pin { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--band-clay); color: #1d1b19; font: 600 12px/1 var(--body); vertical-align: middle; }
+figcaption ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+figcaption li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: start; color: var(--ink); }
+figcaption .pin { background: var(--clay); color: var(--bg); margin-top: 3px; }
+
+.steps { counter-reset: s; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; }
+.steps li::before { content: counter(s); font: 600 15px/30px var(--display); color: var(--clay); background: var(--clay-soft); border-radius: 50%; width: 30px; height: 30px; text-align: center; }
+
+.stepbody { display: grid; gap: 12px; min-width: 0; }
+.choice { display: grid; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.snippet { position: relative; background: var(--surface); border-radius: 10px; }
+.snippet pre { margin: 0; padding: 14px 84px 14px 16px; font: 500 14px/1.6 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); }
+.copy { position: absolute; top: 8px; right: 8px; font: 600 14px/1 var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.copy:hover { border-color: var(--clay); color: var(--clay); }
+.note { background: var(--surface); border-radius: 12px; padding: 16px 18px; display: grid; gap: 6px; }
+.note strong { font-weight: 600; }
+
+.tablewrap { border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 16px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--muted); font-size: 14px; }
+tr:last-child td { border-bottom: 0; }
+
+dl.faq { margin: 0; display: grid; gap: 18px; }
+dl.faq dt { font-weight: 600; }
+dl.faq dd { margin: 4px 0 0; color: var(--muted); max-width: 64ch; }
+
+footer { padding-top: 64px; color: var(--muted); font-size: 15px; }
+
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  nav.toc { display: none; }
+  .row { grid-template-columns: 36px minmax(0, 1fr); }
+  .acts { grid-column: 2; }
+  th, td { padding: 8px 10px; }
+  .brow .end { margin-left: 0; }
+}
+/* Print and PDF: one light column, no contents rail or copy buttons, no breaks inside a step, table or snippet. */
+@media print {
+  @page { size: A4; margin: 15mm 16mm 16mm; }
+  :root, :root[data-theme="dark"] {
+    --bg: #ffffff; --surface: #f5f4f2; --line: #e4e1dc; --ink: #1d1b19; --muted: #5c5853; --clay: #b5522f; --clay-soft: #f6e9e4;
+    color-scheme: light;
+  }
+  body { font-size: 11pt; padding: 0; }
+  .wrap { display: block; max-width: none; }
+  nav.toc, .copy { display: none; }
+  main { max-width: none; }
+  header.hero { padding-top: 0; }
+  /* Block flow, not grid, so a heading can hold on to what follows it across a page break. */
+  section { display: block; padding-top: 22pt; }
+  section > * + * { margin-top: 10pt; }
+  h2, h3 { break-after: avoid; page-break-after: avoid; }
+  h2 + *, h3 + * { break-before: avoid; page-break-before: avoid; }
+  #band, #start { break-inside: avoid; }
+  /* The page is narrower than the phone breakpoint; keep the band picture in its desktop layout. */
+  .row { grid-template-columns: 36px minmax(0, 1fr) auto; }
+  .acts { grid-column: auto; }
+  .brow { flex-wrap: nowrap; }
+  .brow .end { margin-left: auto; }
+  .field { flex: 0 1 160px; }
+  footer { padding-top: 14pt; break-before: avoid; page-break-before: avoid; }
+  #build { padding-top: 16pt; }
+  .steps li, .choice, .snippet, .note, .tablewrap, figure.band, dl.faq > div { break-inside: avoid; }
+  .snippet pre { padding-right: 16px; }
+  .spark g { animation: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spark g { animation: breathe 1.6s ease-in-out infinite alternate; transform-origin: 12px 12px; }
+  @keyframes breathe { from { transform: scale(.78); opacity: .55; } }
+}
+</style>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Contents">
+    <p>On this page</p>
+    <ol>
+      <li><a href="#install">Install</a></li>
+      <li><a href="#start">Quick start</a></li>
+      <li><a href="#band">The band</a></li>
+      <li><a href="#find">Find a skill</a></li>
+      <li><a href="#use">Use a skill</a></li>
+      <li><a href="#edit">Edit, retype, hide</a></li>
+      <li><a href="#panel">Side panel</a></li>
+      <li><a href="#data">What it reads and keeps</a></li>
+      <li><a href="#surfaces">Desktop and terminal</a></li>
+      <li><a href="#faq">Questions</a></li>
+      <li><a href="#build">For contributors</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <span class="mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="var(--clay)" stroke-width="2.6" stroke-linecap="round"><path d="M12 3.5v17"/><path d="M12 3.5v17" transform="rotate(45 12 12)"/><path d="M12 3.5v17" transform="rotate(90 12 12)"/><path d="M12 3.5v17" transform="rotate(135 12 12)"/></g></svg>
+        A Claude Code mod, version 0.4.0
+      </span>
+      <h1>Skill library</h1>
+      <p class="lede">See every skill you have, grouped by what it does, and drop one into the prompt with one click, without remembering its name.</p>
+    </header>
+
+    <section id="install" aria-labelledby="install-h">
+      <h2 id="install-h">Install</h2>
+      <p>The mod is a folder. You keep it on your computer and tell Claude Code where it is. It takes about two minutes, and you need Claude Code already set up.</p>
+      <ol class="steps">
+        <li><div class="stepbody"><p><strong>Download and unzip it.</strong> On <a href="https://github.com/Sfontfr97/skill-library">github.com/Sfontfr97/skill-library</a>, click Code, then Download ZIP. Unzip it, rename the folder to <code>skill-library</code> if it ends in <code>-main</code>, and move the folder somewhere it can stay, such as a <code>Tools</code> folder in your home folder. Claude reads it from there every time, so don't leave it in Downloads.</p></div></li>
+        <li><div class="stepbody"><p><strong>Copy the folder's path.</strong> On a Mac, select the folder in Finder, hold <kbd>option</kbd>, open the right-click menu and choose <em>Copy "skill-library" as Pathname</em>. It looks like this:</p>
+          <div class="snippet"><pre id="snip-path">/Users/your-name/Tools/skill-library</pre><button type="button" class="copy" data-copy="snip-path">Copy</button></div></div></li>
+        <li><div class="stepbody"><p><strong>Tell Claude Code where it is.</strong> Pick how you use Claude Code.</p>
+          <div class="choice">
+            <h3>Desktop app</h3>
+            <p>Open <code>~/.claude/settings.json</code> in any text editor (in Finder, press <kbd>cmd</kbd>+<kbd>shift</kbd>+<kbd>g</kbd> and paste <code>~/.claude</code>). Add this line inside the <code>env</code> block, with your own path. If the file has no <code>env</code> block, add the whole thing:</p>
+            <div class="snippet"><pre id="snip-env">"env": {
+  "CLAUDE_CODE_PLUGIN_DIRS": "/Users/your-name/Tools/skill-library"
+}</pre><button type="button" class="copy" data-copy="snip-env">Copy</button></div>
+            <p>Already have <code>CLAUDE_CODE_PLUGIN_DIRS</code>? Add this path to it, separated by a colon (a semicolon on Windows). Then quit and reopen the app.</p>
+          </div>
+          <div class="choice">
+            <h3>Terminal</h3>
+            <p>Start Claude with the folder each time. Or add the same <code>env</code> line above, and every session loads it.</p>
+            <div class="snippet"><pre id="snip-cli">claude --plugin-dir ~/Tools/skill-library</pre><button type="button" class="copy" data-copy="snip-cli">Copy</button></div>
+          </div></div></li>
+        <li><div class="stepbody"><p><strong>Check it works.</strong> Type <code>/skill-library</code> in the prompt. You should see "Skill library is above the prompt." and the library just above it. If the command doesn't exist, the path is wrong or the app wasn't restarted.</p></div></li>
+      </ol>
+      <div class="note"><strong>Updating to a new version</strong><p>Replace the folder with the new one, in the same place, and start a new session. Your names, types, hidden skills and Most used counts are kept, since they don't live in the folder.</p></div>
+      <div class="note"><strong>Removing it</strong><p>Delete the path from <code>settings.json</code> and restart. You can then delete the folder.</p></div>
+    </section>
+
+    <section id="start" aria-labelledby="start-h">
+      <h2 id="start-h">Quick start</h2>
+      <ol class="steps">
+        <li><p><strong>Open it.</strong> Type <code>/skill-library</code>. The library opens just above the prompt. The same command closes it.</p></li>
+        <li><p><strong>Find a skill.</strong> Start typing in the search field, or pick a type tab such as Review or Write. Show switches between your own skills and your plugins'.</p></li>
+        <li><p><strong>Use it.</strong> Press <strong>Use</strong>. The skill goes to the start of your prompt and the library closes. Add what you want done and send it.</p></li>
+        <li><p><strong>Make it yours.</strong> Press the pencil on any row to rename a skill, fix its type, or hide one you never use.</p></li>
+      </ol>
+    </section>
+
+    <section id="band" aria-labelledby="band-h">
+      <h2 id="band-h">The band</h2>
+      <p>This is the library as it appears in the desktop app. The numbers match the list below it.</p>
+      <figure class="band">
+        <div class="bandbox" role="img" aria-label="The skill library band: a top row with the Skills title, the Show picker set to Mine, a search field, Expand and Close; a row of type tabs; then skills grouped under Most used and Review, each with a pencil and a Use button.">
+          <div class="brow">
+            <span class="brand"><svg class="spark" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="var(--band-clay)" stroke-width="2.6" stroke-linecap="round"><path d="M12 3.5v17"/><path d="M12 3.5v17" transform="rotate(45 12 12)"/><path d="M12 3.5v17" transform="rotate(90 12 12)"/><path d="M12 3.5v17" transform="rotate(135 12 12)"/></g></svg>Skills <span class="pin">1</span></span>
+            <span class="dim">Show</span><span class="pick">Mine <span aria-hidden="true">⌄</span></span><span class="pin">2</span>
+            <span class="field">⌕&nbsp; Search skills</span><span class="pin">3</span>
+            <span class="end"><span>Expand</span><span>Close</span><span class="pin">7</span></span>
+          </div>
+          <div class="tabs"><span class="on">All 9</span><span>Review 3</span><span>Write 3</span><span>Explore 1</span><span>Build 2</span><span class="pin">4</span></div>
+          <div class="group">Most used <span class="pin">5</span></div>
+          <div class="row">
+            <span class="tile"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--band-clay)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 32l2-6 11-11 4 4-11 11z"/><path d="M26 18l4 4"/></g></svg></span>
+            <span style="min-width:0"><b>/write</b><span class="sum">Write or rewrite text in your voice, short and clear.</span></span>
+            <span class="acts"><span class="pen">✎</span><span>Use</span><span class="pin">6</span></span>
+          </div>
+          <div class="group">Review</div>
+          <div class="row">
+            <span class="tile"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--band-clay)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="22" r="7.5"/><path d="M27.5 27.5L33 33"/><path d="M18.8 22.2l2.2 2.2 4.2-4.4"/></g></svg></span>
+            <span style="min-width:0"><b>/declutter</b><span class="sum">Audit and simplify UI screens so they are clean, minimal and intuitive.</span></span>
+            <span class="acts"><span class="pen">✎</span><span>Use</span></span>
+          </div>
+        </div>
+        <figcaption>
+          <ol>
+            <li><span class="pin" aria-hidden="true">1</span><span><strong>The spark.</strong> It turns into place when the library opens, and breathes slowly while Claude is working on a turn, then rests.</span></li>
+            <li><span class="pin" aria-hidden="true">2</span><span><strong>Show</strong> picks where skills come from: your own, everything, one plugin, or the ones you hid.</span></li>
+            <li><span class="pin" aria-hidden="true">3</span><span><strong>Search</strong> filters as you type, across every source.</span></li>
+            <li><span class="pin" aria-hidden="true">4</span><span><strong>Type tabs</strong> narrow the list to what a skill does. Each shows how many skills it holds.</span></li>
+            <li><span class="pin" aria-hidden="true">5</span><span><strong>Most used</strong> keeps the three skills you pick most at the top of your own list.</span></li>
+            <li><span class="pin" aria-hidden="true">6</span><span><strong>The pencil</strong> opens edit for that row; <strong>Use</strong> puts the skill in the prompt.</span></li>
+            <li><span class="pin" aria-hidden="true">7</span><span><strong>Expand</strong> moves the library into a full-height side panel; <strong>Close</strong> hides it.</span></li>
+          </ol>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="find" aria-labelledby="find-h">
+      <h2 id="find-h">Find a skill</h2>
+      <h3>By where it comes from</h3>
+      <p><strong>Show</strong> opens on <strong>Mine</strong>, the skills in your own <code>~/.claude/skills</code> folder. <strong>Everything</strong> adds the skills of every plugin you installed, and each plugin also has its own entry, largest first. <strong>Hidden</strong> appears last once you hide a skill. With only one source, Show is not drawn at all.</p>
+      <h3>By what it does</h3>
+      <p>Every skill gets one of five types, guessed from its name and then its description:</p>
+      <div class="tablewrap">
+        <table>
+          <colgroup><col style="width:22%"><col></colgroup>
+          <thead><tr><th scope="col">Type</th><th scope="col">Words that place a skill there</th></tr></thead>
+          <tbody>
+            <tr><td>Review</td><td>review, audit, QA, evaluate, debug, troubleshoot, accessibility, declutter, optimize</td></tr>
+            <tr><td>Write</td><td>write, rewrite, copy, message, email, document, report, summary, handoff, spec</td></tr>
+            <tr><td>Explore</td><td>explore, research, options, direction, brainstorm, compare, ideas</td></tr>
+            <tr><td>Build</td><td>build, create, generate, implement, prototype, component, diagram, library</td></tr>
+            <tr><td>Other</td><td>anything none of the above match</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The guess is sometimes wrong. You can set the type yourself in <a href="#edit">Edit</a>.</p>
+      <h3>By searching</h3>
+      <p>Type in the search field and the list filters right away, across every source (Show switches to Everything while you search). Results are ranked so the skill you mean comes first:</p>
+      <ol class="steps">
+        <li><p>The name starts with what you typed.</p></li>
+        <li><p>The name, or the name you gave it, contains it.</p></li>
+        <li><p>The one line summary on the row contains it.</p></li>
+        <li><p>The plugin name contains it, so <code>figma</code> finds every Figma skill.</p></li>
+        <li><p>It only appears somewhere in the full description.</p></li>
+      </ol>
+      <p>Press <strong>×</strong>, or Enter, to clear the search.</p>
+    </section>
+
+    <section id="use" aria-labelledby="use-h">
+      <h2 id="use-h">Use a skill</h2>
+      <p><strong>Use</strong> puts <code>/skill-name</code> at the start of the prompt and keeps anything you had already typed after it. If the prompt already starts with a slash command, Use replaces it. The band then closes, since your pick is in the prompt. Plugin skills show a short name on the row (<code>/a11y-debugging</code>), and Use still types the full one (<code>/chrome-devtools-mcp:a11y-debugging</code>).</p>
+      <p>Each pick also counts toward <strong>Most used</strong>: the three skills you pick most sit at the top of Mine, and leave their type group so nothing appears twice. A tie goes to the one you used last.</p>
+      <p>The band shows 8 skills at first. <strong>Load more</strong> at the bottom adds 8 more.</p>
+    </section>
+
+    <section id="edit" aria-labelledby="edit-h">
+      <h2 id="edit-h">Edit, retype, hide</h2>
+      <p>The pencil (the word <strong>Edit</strong> in a terminal) opens a small form on that row. Nothing changes until you press <strong>Save</strong>, or Enter in a field. <strong>Cancel</strong> drops what you typed.</p>
+      <ul class="plain">
+        <li><strong>Name</strong> shows on the row in place of the command. The real command still shows next to it, dimmed, and Use still types it.</li>
+        <li><strong>Description</strong> replaces the one line summary.</li>
+        <li><strong>Type</strong> moves the skill to another tab. <em>Automatic</em> shows the guess and goes back to it.</li>
+        <li><strong>Hide</strong> takes the skill out of every list and the search, right away. Find it again under Show, Hidden, and press <strong>Unhide</strong> there.</li>
+        <li><strong>Reset</strong> appears once you changed something, and puts the skill back as it was.</li>
+      </ul>
+      <div class="note"><strong>Your skill files stay untouched.</strong><p>Edits are labels kept by the mod. The <code>SKILL.md</code> files, and what Claude reads from them, never change.</p></div>
+    </section>
+
+    <section id="panel" aria-labelledby="panel-h">
+      <h2 id="panel-h">Side panel</h2>
+      <p>The band above the prompt can only grow as tall as the app allows. For a roomier view, press <strong>Expand</strong>: the same library opens as a full-height side panel and shows up to 40 skills at once. The panel stays open after Use, since it does not cover the prompt. <strong>Collapse</strong> puts it back above the prompt. On a narrow window the panel cannot open, and a short message says so.</p>
+    </section>
+
+    <section id="data" aria-labelledby="data-h">
+      <h2 id="data-h">What it reads and keeps</h2>
+      <div class="tablewrap">
+        <table>
+          <colgroup><col style="width:30%"><col></colgroup>
+          <thead><tr><th scope="col">What</th><th scope="col">Where</th></tr></thead>
+          <tbody>
+            <tr><td>Your skills</td><td>Each folder in <code>~/.claude/skills</code> with a <code>SKILL.md</code></td></tr>
+            <tr><td>Plugin skills</td><td>The newest installed version of each plugin, under <code>~/.claude/plugins/cache</code></td></tr>
+            <tr><td>Names, descriptions, types, hidden</td><td>The mod's own storage on your machine, kept across sessions</td></tr>
+            <tr><td>Most used counts</td><td>The same storage: how many times you picked each skill, and when last</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Nothing leaves your machine, and the mod never writes to a skill or plugin folder. The library reads the folders each time you open it, so a new skill shows up the next time you run <code>/skill-library</code>.</p>
+    </section>
+
+    <section id="surfaces" aria-labelledby="surfaces-h">
+      <h2 id="surfaces-h">Desktop and terminal</h2>
+      <p>The library works in both, and adapts to what each can draw.</p>
+      <div class="tablewrap">
+        <table>
+          <colgroup><col style="width:28%"><col style="width:36%"><col></colgroup>
+          <thead><tr><th scope="col"></th><th scope="col">Desktop app</th><th scope="col">Terminal</th></tr></thead>
+          <tbody>
+            <tr><td>Icons and motion</td><td>Type icons, a moving spark, small hover moves</td><td>The ✻ mark in clay, no icons</td></tr>
+            <tr><td>Edit and clear</td><td>✎ and ×</td><td>The words Edit and Clear</td></tr>
+            <tr><td>Number keys</td><td>None</td><td>Rows 1 to 9 answer their number, shown as <code>1: Use</code></td></tr>
+            <tr><td>Scrolling</td><td>The whole band scrolls, tabs included</td><td>The tabs stay put and the list scrolls under them</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>In a terminal, focus the band with a click or <kbd>ctrl</kbd>+<kbd>x</kbd> then <kbd>tab</kbd>, and collapse it with <kbd>ctrl</kbd>+<kbd>x</kbd> then <kbd>ctrl</kbd>+<kbd>a</kbd>. All motion stops when your system is set to reduce motion.</p>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-h">
+      <h2 id="faq-h">Questions</h2>
+      <dl class="faq">
+        <div><dt>I ran the command and see "No skills yet".</dt><dd>The mod found no folder with a <code>SKILL.md</code> in <code>~/.claude/skills</code> and no plugin skills. Add one, then run <code>/skill-library</code> again.</dd></div>
+        <div><dt>Where are docx, pdf and the other built-in skills?</dt><dd>The skills that come with Claude live in a private folder of the app, so this version does not list them yet. They still work from the <code>/</code> menu.</dd></div>
+        <div><dt>A skill is under the wrong type.</dt><dd>Open the pencil on its row, pick the right Type, and Save.</dd></div>
+        <div><dt>I hid a skill by mistake.</dt><dd>Set Show to Hidden, open the pencil on its row, and press Unhide.</dd></div>
+        <div><dt>Most used is empty.</dt><dd>It fills as you pick skills with Use. Picks from before version 0.4.0 were not counted.</dd></div>
+        <div><dt>Can a teammate see my names, types or counts?</dt><dd>No. They are stored on your machine, for you only.</dd></div>
+      </dl>
+    </section>
+
+    <section id="build" aria-labelledby="build-h">
+      <h2 id="build-h">For contributors</h2>
+      <div class="tablewrap">
+        <table>
+          <colgroup><col style="width:34%"><col></colgroup>
+          <thead><tr><th scope="col">File</th><th scope="col">What it holds</th></tr></thead>
+          <tbody>
+            <tr><td><code>hooks/register.tsx</code></td><td>The command, the band and the side panel, search, edit, Most used</td></tr>
+            <tr><td><code>hooks/links.ts</code></td><td>Reads descriptions, guesses each type, writes the one line summary</td></tr>
+            <tr><td><code>hooks/icons.ts</code></td><td>The type icons and the spark, with their motion</td></tr>
+            <tr><td><code>hooks/*.test.ts</code></td><td>Tests on the terminal and desktop surfaces</td></tr>
+            <tr><td><code>types/index.d.ts</code></td><td>The values the mod keeps</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Run the tests with <code>claude plugin test .</code> and check the mod with <code>claude plugin validate .</code> from its folder. The tests cover behaviour, not how the desktop app paints, so look at a change in the app before sharing it.</p>
+    </section>
+
+    <footer>Designed by Sergi Font. Skill library 0.4.0.</footer>
+    <script>
+      // Copy buttons: write the snippet to the clipboard, or select it when the clipboard is refused.
+      document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', async () => {
+        const pre = document.getElementById(btn.dataset.copy)
+        try { await navigator.clipboard.writeText(pre.textContent); btn.textContent = 'Copied' }
+        catch { const r = document.createRange(); r.selectNodeContents(pre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent = 'Selected' }
+        setTimeout(() => { btn.textContent = 'Copy' }, 1600)
+      }))
+    </script>
+  </main>
+</div>
